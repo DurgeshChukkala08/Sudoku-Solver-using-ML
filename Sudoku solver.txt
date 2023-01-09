@@ -1,0 +1,23 @@
+Line 1-10 – Importing libraries required for Sudoku Solver.
+Line 12-14 – Load the mnist model and the sudoku image. Also declare a constant img_shape which will be the size of our sudoku image after resizing.
+Line 16-45 – This function will find the puzzle in the image through Image Processing techniques.
+Read the image, convert it to grayscale, and then apply Gaussian Blur to remove Gaussian Noise.
+The threshold the image and inverse it. Means convert white to black and black to white.
+Then find the contours and extract the biggest contour in the image. This is probably our sudoku.
+Apply four point transformation to get the straight view of the puzzle and return it.
+Line 49-77 – This function will extract the digit cell from the puzzle and return it so that the mnist model could identify the number in it.
+Line 80-97 – This function will simply put the numbers on the image/board.
+Line 99-100 – Simply read and resize the image.
+Line 102-104 – Extract the puzzle and resize it.
+Line 106-107 – This will tell us the step size we have to take in the x and y-direction. This step is basically the cell size in the x and y directions respectively.
+Line 109 – Create the board with all values initialized with 0s.
+Line 110 – Create array cell_locs which will contain the cell locations/coordinates.
+Line 112-127 – Traverse in the 9*9 loop where the first 9 represents the 9 rows of the board and the second 9 represents the 9 columns of the board. On traversing it will extract the cell images, predict the number using mnist and put that number in the board array we created in Line 109. Also, we will keep on storing the cell locations in the cell_loc array.
+Line 133-145 – If by chance any of the numbers is wrongly predicted by the mnist, correct it.
+
+NOTE – The numbers in blue are predicted numbers for that cell. The text in red is the address of that cell. If any number is wrongly classified by mnist, correct that. Like the first wrong classified number is at (4,7). The original number there is 1 but the mnist said it is 7 so we will correct it first.
+
+
+Line 147 – Solve the sudoku using the solveSudoku function that we imported from Sudoku.py. This Sudoku.py is also written by me and I have used Backtracking for solving sudoku.
+Line 149-150 – Display the solved sudoku numbers on the final image and display it.
+Line 152-153 – Destroy all windows.
